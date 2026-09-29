@@ -118,12 +118,12 @@ export default function LandingPage() {
                   <div className="flex items-center gap-space-sm">
                     <img
                       className="w-12 h-12 rounded-full object-cover shadow-sm ring-2 ring-primary/20"
-                      alt="Sumi Zaman"
+                      alt="Nusrat Jahan"
                       src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPVyus1mj1j-i3QD9SrfACSS2B6ggaEKoZ5EkNuR38dmlWeQrMyX-uX7QaL-hRSDhjoMJYCKXa53wz2iXiMHVxTwTYVeTOM_owJv2JOpWXVIfwaXuY_OH-i0gO-zjIgA3OcmX7F3-OYdUmq8G13bCjkxY1ZrSYy7LTTwDcNSnTOyUPTk67PnCuolCiVNzdkQqK2UjgXzMyW2kua8leb5kaGt62zV0diSWn-xZXGZEcPpbP5ZRWwtXv"
                     />
                     <div className="flex flex-col">
                       <span className="font-headline-sm text-headline-sm text-deep-navy font-bold text-base leading-none">
-                        সুমি জামান
+                        নুসরাত জাহান
                       </span>
                       <span className="font-body-sm text-body-sm text-on-surface-variant">
                         সুমিস ক্রাফট অ্যান্ড জামদানি, মিরপুর
@@ -211,7 +211,7 @@ export default function LandingPage() {
                         আজকের নিট ক্যাশ ইনফ্লো
                       </span>
                       <span className="font-headline-md text-headline-md font-bold text-primary-fixed">
-                        ৳ {netProfit.toLocaleString()}.০০
+                        ৳ ৯,৩০০.০০
                       </span>
                     </div>
                     <div className="text-right">
