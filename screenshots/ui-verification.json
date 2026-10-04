@@ -1,0 +1,384 @@
+{
+  "desktop": [
+    {
+      "route": "/",
+      "width": 1440,
+      "scroll": 1434,
+      "title": "Your AI partnerfor smarterbusiness decisions.",
+      "fonts": [
+        true,
+        true
+      ]
+    },
+    {
+      "route": "/dashboard?demo=1",
+      "width": 1440,
+      "scroll": 1434,
+      "title": "Your business, looking ahead.",
+      "fonts": [
+        true,
+        true
+      ]
+    },
+    {
+      "route": "/voice",
+      "width": 1440,
+      "scroll": 1434,
+      "title": "Big things start with a conversation.",
+      "fonts": [
+        true,
+        true
+      ]
+    },
+    {
+      "route": "/agents",
+      "width": 1440,
+      "scroll": 1434,
+      "title": "One core. A team in your corner.",
+      "fonts": [
+        true,
+        true
+      ]
+    },
+    {
+      "route": "/fraud",
+      "width": 1440,
+      "scroll": 1434,
+      "title": "Confidence before you click.",
+      "fonts": [
+        true,
+        true
+      ]
+    },
+    {
+      "route": "/insights?demo=1",
+      "width": 1440,
+      "scroll": 1434,
+      "title": "See the progress. Find the possibility.",
+      "fonts": [
+        true,
+        true
+      ]
+    },
+    {
+      "route": "/profile",
+      "loaded": true
+    },
+    {
+      "route": "/mitra",
+      "loaded": true
+    },
+    {
+      "route": "/impact",
+      "loaded": true
+    }
+  ],
+  "mobile": [
+    {
+      "route": "/",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/dashboard?demo=1",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/voice",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/agents",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/fraud",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/insights?demo=1",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/profile",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/mitra",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "route": "/impact",
+      "width": 390,
+      "scroll": 390
+    }
+  ],
+  "interactions": [
+    "Real /chat preview and idempotent save",
+    "Dashboard question answered",
+    "Filters, demo toggle and keyboard modal dismissal",
+    "All four agents return actual API previews",
+    "Fraud HIGH and LOW API results",
+    "Live insights and three chart views",
+    "Mobile drawer navigation",
+    "Reduced motion respected"
+  ],
+  "api": [
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/fraud-check",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/insights",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/transactions?limit=500&offset=0",
+      "status": 200
+    }
+  ],
+  "errors": []
+}

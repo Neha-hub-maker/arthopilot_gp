@@ -1,5 +1,13 @@
 # dependencies
 /node_modules
+/frontend/node_modules/
+/frontend/.cache/
+/backend/.venv/
+/backend/.cache/
+/backend/tmp/
+/backend/data/
+__pycache__/
+*.pyc
 /.pnp
 .pnp.js
 
@@ -28,6 +36,11 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# local deployment state and source verification snapshots
+.netlify/
+/screenshots/backend-before.json
+/screenshots/dynamic-before.json
 
 # typescript
 *.tsbuildinfo

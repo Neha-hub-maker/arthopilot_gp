@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
+import { api, apiError, ApiTransaction, categoryLabel } from "@/lib/api";
 
 export interface Transaction {
   id: string;
@@ -15,6 +16,7 @@ export interface Transaction {
   dialect?: string;
   note?: string;
   fraudRisk?: "safe" | "low" | "high";
+  createdAt?: string;
 }
 
 export interface FraudIncident {
@@ -35,7 +37,7 @@ interface AppContextType {
   setLanguage: (lang: "bn" | "en") => void;
   toggleLanguage: () => void;
   transactions: Transaction[];
-  addTransaction: (tx: Omit<Transaction, "id">) => void;
+  addTransaction: (message: string, requestId: string) => Promise<boolean>;
   todaySales: number;
   todayExpenses: number;
   netProfit: number;
@@ -173,13 +175,16 @@ const initialFraud: FraudIncident = {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<"bn" | "en">("bn");
-  const [transactions, setTransactions] = useState<Transaction[]>(initialTransactions);
+  const [language, setLanguage] = useState<"bn" | "en">("en");
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const pendingSaves = useRef(new Set<string>());
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [fraudIncident, setFraudIncident] = useState<FraudIncident>(initialFraud);
   const [mitraModalOpen, setMitraModalOpen] = useState(false);
   const [mitraRequestStatus, setMitraRequestStatus] = useState<"idle" | "submitted" | "confirmed">("idle");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  useEffect(() => { document.documentElement.lang = language; }, [language]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "bn" ? "en" : "bn"));
@@ -192,25 +197,50 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }, 4000);
   };
 
-  const addTransaction = (newTx: Omit<Transaction, "id">) => {
-    const tx: Transaction = {
-      ...newTx,
-      id: `tx-${Date.now()}`,
-    };
-    setTransactions((prev) => [tx, ...prev]);
-    showToast(
-      language === "bn"
-        ? `✅ হিসাব সফলভাবে সংরক্ষণ করা হয়েছে: ৳${tx.amount.toLocaleString()}`
-        : `✅ Entry successfully saved: ৳${tx.amount.toLocaleString()}`
-    );
+  const toTransaction = (tx: ApiTransaction): Transaction => ({
+    id: tx.id, title: tx.description, category: categoryLabel(tx.category),
+    amount: tx.amount, type: tx.type === "sale" ? "inflow" : "outflow",
+    method: tx.method, createdAt: tx.created_at,
+    time: new Date(tx.created_at).toLocaleTimeString("bn-BD", { timeZone: "Asia/Dhaka", hour: "2-digit", minute: "2-digit" }),
+    voucherNo: `AP-${tx.id.slice(0, 8)}`, isAiParsed: true,
+  });
+
+  useEffect(() => {
+    let active = true;
+    api.transactions().then((rows) => {
+      if (active) setTransactions((previous) => {
+        const merged = new Map(rows.map((tx) => [tx.id, toTransaction(tx)]));
+        previous.forEach((tx) => merged.set(tx.id, tx));
+        return Array.from(merged.values()).sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
+      });
+    }).catch((error) => { if (active) showToast(apiError(error)); });
+    return () => { active = false; };
+  }, []);
+
+  const addTransaction = async (message: string, requestId: string) => {
+    if (pendingSaves.current.has(requestId)) return false;
+    pendingSaves.current.add(requestId);
+    try {
+      const result = await api.chat(message, { save: true, request_id: requestId });
+      showToast(result.message);
+      if (!result.transaction) return false;
+      const tx = toTransaction(result.transaction);
+      setTransactions((previous) => [tx, ...previous.filter((item) => item.id !== tx.id)]);
+      return true;
+    } catch (error) {
+      showToast(apiError(error));
+      return false;
+    } finally { pendingSaves.current.delete(requestId); }
   };
 
   // Computations
-  const todaySales = transactions
+  const todayKey = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Dhaka" });
+  const todayTransactions = transactions.filter((tx) => tx.createdAt?.slice(0, 10) === todayKey);
+  const todaySales = todayTransactions
     .filter((t) => t.type === "inflow")
     .reduce((acc, curr) => acc + curr.amount, 0);
 
-  const todayExpenses = transactions
+  const todayExpenses = todayTransactions
     .filter((t) => t.type === "outflow")
     .reduce((acc, curr) => acc + curr.amount, 0);
 
@@ -218,7 +248,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const cashDrawer = transactions
     .filter((t) => t.method === "Cash")
-    .reduce((acc, curr) => (curr.type === "inflow" ? acc + curr.amount : acc - curr.amount), 4300);
+    .reduce((acc, curr) => (curr.type === "inflow" ? acc + curr.amount : acc - curr.amount), 0);
 
   const bKashTotal = transactions
     .filter((t) => t.method === "bKash" && t.type === "inflow")
@@ -235,8 +265,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }));
     showToast(
       language === "bn"
-        ? "🛡️ সতর্কতা কার্যকর: পার্সেল ডেলিভারি আটকে রাখা হয়েছে এবং ব্যাংককে অবহিত করা হয়েছে।"
-        : "🛡️ Action taken: Delivery successfully frozen and reported to gateway security."
+        ? "ডেমো: লেনদেন স্থগিত হিসেবে চিহ্নিত। কোনো ব্যাংক বা পেমেন্ট সেবায় পরিবর্তন করা হয়নি।"
+        : "Demo: transaction marked on hold. No bank or payment service was contacted."
     );
   };
 
@@ -247,8 +277,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }));
     showToast(
       language === "bn"
-        ? "🚨 জালিয়াতি রিপোর্ট বাংলাদেশ সাইবার পুলিশ ও বিকাশ সিকিউরিটিতে জমা দেওয়া হয়েছে।"
-        : "🚨 Scammer shortcode blacklisted and report dispatched to Cyber Police."
+        ? "ডেমো: ঘটনাটি রিপোর্ট হিসেবে চিহ্নিত। পুলিশ বা বিকাশে কোনো রিপোর্ট পাঠানো হয়নি।"
+        : "Demo: incident marked as reported. No report was sent to police or bKash."
     );
   };
 

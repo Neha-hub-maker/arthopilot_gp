@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./local-fonts.css";
+import "./product.css";
+import "./motion.css";
+import { MotionProvider } from "@/components/product/Motion";
 import { AppProvider } from "@/context/AppContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Workspace from "@/components/product/Workspace";
 import VoiceModal from "@/components/VoiceModal";
 import FloatingMic from "@/components/FloatingMic";
 import Toast from "@/components/Toast";
@@ -19,30 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bn">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en">
       <body className="bg-bg-canvas font-body-md text-on-surface antialiased selection:bg-vibrant-teal selection:text-white">
-        <AppProvider>
-          <Header />
-          <main className="w-full pt-20 bg-bg-canvas min-h-screen">
-            {children}
-          </main>
-          <Footer />
+        <MotionProvider><AppProvider>
+          <Workspace>{children}</Workspace>
           <VoiceModal />
           <FloatingMic />
           <Toast />
-        </AppProvider>
+        </AppProvider></MotionProvider>
       </body>
     </html>
   );

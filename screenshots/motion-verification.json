@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "Progressive section reveal and offscreen ambient suspension",
+    "Pause control stops ambient CSS motion and rotating content",
+    "Metrics interpolate, settle exactly, and expose stable accessible values",
+    "Chart draw animation and keyboard data inspection",
+    "Four slow agent connection signals",
+    "Simulated microphone lifecycle; real API understanding, finding, and preview states",
+    "Reduced motion shows all content and exact figures without movement",
+    "Mobile hero remains steady and chart data responds to touch"
+  ],
+  "observations": {
+    "countUp": {
+      "intermediate": "৳3,988",
+      "finalValue": "৳12,500"
+    }
+  },
+  "errors": []
+}
